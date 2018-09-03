@@ -9,7 +9,6 @@ class LinkedList
           self.first = current
         end
         current.data = d
-        puts current.data.to_s
         current.next = Node.new nil
         current = current.next
       end
@@ -58,12 +57,25 @@ class LinkedList
     end
   end
 
-  class Node
-    attr_accessor :data
-    attr_accessor :next
+  def contains data
+    contains_rec data, self.first
+  end
 
-    def initialize data
-      self.data = data
+  def contains_rec data, node
+    if node == nil
+      false
+    elsif node.data == data
+      true
+    else
+      self.contains_rec data, node.next
     end
+  end
+end
+
+class Node
+  attr_accessor :data, :next
+
+  def initialize data
+    self.data = data
   end
 end
